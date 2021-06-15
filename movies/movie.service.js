@@ -22,9 +22,6 @@ async function getById(id) {
 
 async function create(movieParam) {
     
-    if (await Movie.findOne({ moviename: movieParam.moviename })) {
-        throw 'Username "' + movieParam.moviename + '" is already taken';
-    }
 
     const movie = new Movie(movieParam);
 
@@ -40,7 +37,7 @@ async function update(id, movieParam) {
 
     if (!movie) throw 'Movie not found';
     if (movie.moviename !== movieParam.moviename && await Movie.findOne({ moviename: movieParam.moviename })) {
-        throw 'Username "' + movieParam.moviename + '" is already taken';
+        throw 'movie "' + movieParam.moviename + '" is already taken';
     }
 
     if (movieParam.password) {
